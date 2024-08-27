@@ -162,5 +162,5 @@ func main() {
 	httpClient := getProxyClient(proxyUrl, ignoreSslBool)
 
 	//proxy all outgoing http requests to socks5 proxy
-	log.Fatal(http.ListenAndServe(serverUrl, newProxyHandler(httpClient, targetHost, headersMap)))
+	log.Fatal(http.ListenAndServe(serverUrl, newProxyHandler(httpClient, headersMap)))
 }
