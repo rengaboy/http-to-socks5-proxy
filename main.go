@@ -136,6 +136,7 @@ func main() {
 
 	targetHost := os.Getenv("TARGET_HOST")
 	if targetHost == "" {
+		targetHost := getTargetHost
 		log.Fatal("TARGET_HOST is not set")
 	}
 
