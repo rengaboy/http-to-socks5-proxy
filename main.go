@@ -32,6 +32,12 @@ func (t *RewriteTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	return t.Transport.RoundTrip(req)
 }
 
+func getTargetHost(w http.ResponseWriter, r *http.Request) {
+	tgtHost := r.Host
+	log.Fatal("Host: " + r.Host)
+	return tgtHost
+}
+
 func getProxyClient(proxy string, ignoreSsl bool) *http.Client {
 	proxyUrl, _ := url.Parse(proxy)
 	myClient := &http.Client{
