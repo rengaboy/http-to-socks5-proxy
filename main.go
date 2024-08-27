@@ -63,10 +63,10 @@ func containsHeader(s string, list []string) bool {
 	return false
 }
 
-func newProxyHandler(httpClient *http.Client, targetHost string, headersMap map[string]string) http.Handler {
+func newProxyHandler(httpClient *http.Client, headersMap map[string]string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// get path from request and append to target url
-		target, _ := url.Parse(targetHost + r.URL.Path)
+		target, _ := url.Parse(r.Host + r.URL.Path)
 		if r.URL.RawQuery != "" {
 			target.RawQuery = r.URL.RawQuery
 		}
@@ -136,8 +136,7 @@ func main() {
 
 	targetHost := os.Getenv("TARGET_HOST")
 	if targetHost == "" {
-		targetHost := getTargetHost
-		log.Fatal("TARGET_HOST is not set")
+		targetHost = "*"
 	}
 
 	ignoreSsl := os.Getenv("IGNORE_SSL")
